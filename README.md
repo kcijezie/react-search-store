@@ -1,4 +1,4 @@
-# ReactJS, GraphQL, ExpressJS, NodeJS with ES6 Module Unit testing and Karma Integration testing seed
+# ReactJS, GraphQL, ExpressJS, NodeJS with Mocha Unit testing
 
 Great seed for ReactJS/GraphQL projects with heavy focus on unit and integration testing.
 
@@ -25,7 +25,7 @@ This repository contains 1 release:
 
 For more detailed info about tests check the mocha [website](https://mochajs.org/).
 
-
-* `*.test.js` - mocha unit tests
-* `*.integration.test.js` - mocha integration tests (manual)
-* `*.spec.js` - karma integration tests (spin up Knockout JS app context)
+* Enter project directory `cd src`
+* Run `npm install` to install JS libraries in src/package.json
+* Run `npm test` for unit tests from src/
+* Run `gulp` to build app from src/
