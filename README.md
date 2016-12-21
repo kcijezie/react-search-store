@@ -1,6 +1,6 @@
-# ReactJS, GraphQL, ExpressJS, NodeJS with Mocha Unit testing
+# ReactJS, ExpressJS, NodeJS with Mocha Unit testing
 
-Great seed for ReactJS/GraphQL projects with heavy focus on unit and integration testing.
+Great seed for ReactJS/Express/Node projects with heavy focus on unit and integration testing.
 
 This repository contains 1 release:
 
@@ -10,7 +10,7 @@ This repository contains 1 release:
 ## Info
 
 * Learn ES2015 Babel blog post [A detailed overview of ECMAScript 2015 features](https://babeljs.io/docs/learn-es2015/)
-* [GraphQL](http://graphql.org/) with examples of express-graphql
+* [Node](http://node.org/) with examples of express-graphql
 
 
 ## Getting started 

@@ -5,8 +5,8 @@
   "keywords": [
     "ReactJS",
     "Node.js",
-    "application",
-    "GraphQL"
+    "ExpressJS",
+    "Mocha"
   ],
   "author": {
     "name": "Kene Ijezie",
@@ -25,7 +25,6 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^3.4.8",
-    "mongojs": "^2.4.0",
     "moment": "^2.14.1"
   },
   "devDependencies": {},
