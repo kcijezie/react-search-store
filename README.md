@@ -13,7 +13,7 @@ This repository contains 1 release:
 * [GraphQL](http://graphql.org/) with examples of express-graphql
 
 
-## Getting started - Find it in react-src/readme
+## Getting started 
 
 1. Clone repository `git clone https://github.com/kcijezie/react-search-store.git`
 2. Enter project directory `cd react-search-store`
@@ -21,7 +21,7 @@ This repository contains 1 release:
 4. Run `node server` - start production server, try it by opening `http://localhost:8080/`
 
 
-# Tests
+# Tests - Find it in /src/readme
 
 For more detailed info about tests check the mocha [website](https://mochajs.org/).
 
