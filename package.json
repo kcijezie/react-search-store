@@ -1,0 +1,35 @@
+{
+  "name": "React-Search-Store",
+  "version": "1.0.0",
+  "description": "React Sample Application",
+  "keywords": [
+    "ReactJS",
+    "Node.js",
+    "application",
+    "GraphQL"
+  ],
+  "author": {
+    "name": "Kene Ijezie",
+    "email": "kcijezie@gmail.com",
+    "url": "https://github.com/kcijezie/react-search-store"
+  },
+  "homepage": "https://github.com/kcijezie/react-search-store",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kcijezie/react-search-store"
+  },
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^3.4.8",
+    "mongojs": "^2.4.0",
+    "moment": "^2.14.1"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+  "private": true,
+  "main": "server.js"
+}

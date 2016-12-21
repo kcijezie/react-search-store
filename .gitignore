@@ -1,0 +1,18 @@
+.DS_Store
+src/node_modules/
+node_modules/
+
+
+# Don't track build output
+src/node_modules/
+
+
+#IntelliJ Ignore
+*.iml
+.idea/*
+.idea
+
+#Target ignore
+*/target/**
+
+test-reports/
