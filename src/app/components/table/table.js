@@ -13,12 +13,12 @@ var TitlesPagination= require('../titles-pagination/titles-pagination');
 import Container from 'muicss/lib/react/container';
 
 var TitleCollection = React.createClass({
-        loadTitlesFromServer: function(pageNo, titleCount, sort) {
+        loadTitlesFromServer: function(pageNo, titleCount, sort, searchString) {
             var self = this;
             var perPage = titleCount || 5;
             var pageSort = sort || 'asc';
             $.ajax({
-                url: '/api/titles?pageNo='+ pageNo +'&perPage='+ perPage +'&sort='+pageSort,
+                url: '/api/titles?pageNo='+ pageNo +'&perPage='+ perPage +'&sort='+ pageSort +'&searchString='+ searchString,
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
@@ -27,7 +27,8 @@ var TitleCollection = React.createClass({
                         page: data.page,
                         totalPages: data.total_pages,
                         perPage: data.per_page,
-                        pageSort: data.sort
+                        pageSort: data.sort,
+                        filterText: data.searchString
                     });
 
 
@@ -45,25 +46,26 @@ var TitleCollection = React.createClass({
         },
 
         handleUserInput: function(filterText){
-            this.setState({
-                filterText: filterText
-            });
+            this.loadTitlesFromServer(this.state.page, this.state.perPage, this.state.pageSort, filterText);
+//            this.setState({
+//                filterText: filterText
+//            });
         },
     
         handleUserSelect: function(selectValue){
-            this.loadTitlesFromServer(1, selectValue, this.state.pageSort);
+            this.loadTitlesFromServer(1, selectValue, this.state.pageSort, this.state.filterText);
         },
     
         handleUserClick: function(clickValue){
-            this.loadTitlesFromServer(clickValue, this.state.perPage, this.state.pageSort);
+            this.loadTitlesFromServer(clickValue, this.state.perPage, this.state.pageSort, this.state.filterText);
         },
     
         handleUserSort: function(sortValue){
-            this.loadTitlesFromServer(this.state.page, this.state.perPage, sortValue);
+            this.loadTitlesFromServer(this.state.page, this.state.perPage, sortValue, this.state.filterText);
         },
 
         componentDidMount: function() {
-            this.loadTitlesFromServer(1, 5, 'asc');
+            this.loadTitlesFromServer(1, 5, 'asc', '');
         },
 
         render: function() {

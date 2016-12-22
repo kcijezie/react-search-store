@@ -29,7 +29,7 @@ class ListTitles extends React.Component {
     render() {
         var self = this;
         var titles  = self.props.titles.map(function(title) {
-            if (title.titleText.toLowerCase().indexOf(self.props.filterText.toLowerCase()) === -1) {
+            if (title === null) {
                 return;
             }
 

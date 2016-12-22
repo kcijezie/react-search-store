@@ -41,7 +41,7 @@ function sortDescending(a,b) {
 };
 
 
-function getPaginatedItems(items, pageNo, perPage, sort) {
+function getPaginatedItems(items, pageNo, perPage, sort, searchString) {
 	var page = pageNo || 1,
 	    per_page = perPage || 5,
 	    title_sort = sort,
@@ -53,8 +53,21 @@ function getPaginatedItems(items, pageNo, perPage, sort) {
 		total: items.length,
 		total_pages: Math.ceil(items.length / per_page),
 		titles: paginatedItems,
-        sort: sort
+        sort: sort,
+        searchString: searchString
 	};
+};
+
+function filterArray(arr, filterText){
+    var titles  = arr.map(function(title) {
+            if (title.titleText.toLowerCase().indexOf(filterText.toLowerCase()) === -1) {
+                return;
+            }
+
+            return title;
+        });
+    
+    return titles;
 };
 
 if (typeof _ipaddress === "undefined") {
@@ -65,6 +78,7 @@ if (typeof _ipaddress === "undefined") {
 app.get('/api/titles', function(req, res) {
     var perPage= req.param('perPage');  
     var pageNo = req.param('pageNo');
+    var searchString = req.param('searchString');
     var sort = req.param('sort') || 'asc';
     var fs = require("fs");
     var content = fs.readFileSync('data/ELSIO-Graph-Example.txt', 'utf8');
@@ -73,7 +87,7 @@ app.get('/api/titles', function(req, res) {
     for(var key in obj.worksById) {
         objArr.push({id: key, titleType: obj.worksById[key].Title.TitleType, titleText: obj.worksById[key].Title.TitleText})
     }
-    res.json(getPaginatedItems(sort === 'asc' ? objArr.sort(sortAscending) : objArr.sort(sortDescending), parseInt(pageNo), parseInt(perPage), sort));    
+    res.json(getPaginatedItems(sort === 'asc' ? filterArray(objArr.sort(sortAscending),searchString) : filterArray(objArr.sort(sortDescending), searchString), parseInt(pageNo), parseInt(perPage), sort, searchString));    
     
 });
 
