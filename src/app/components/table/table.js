@@ -46,7 +46,7 @@ var TitleCollection = React.createClass({
         },
 
         handleUserInput: function(filterText){
-            this.loadTitlesFromServer(this.state.page, this.state.perPage, this.state.pageSort, filterText);
+            this.loadTitlesFromServer(1, this.state.perPage, this.state.pageSort, filterText);
         },
     
         handleUserSelect: function(selectValue){
