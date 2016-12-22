@@ -24,10 +24,38 @@ app.use(morgan('dev'));
 var _ipaddress = process.env.OPENSHIFT_NODEJS_IP;
 var _port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
+function getPaginatedItems(items, pageNo, perPage) {
+	var page = pageNo || 1,
+	    per_page = perPage || 5,
+	    offset = (page - 1) * per_page,
+	    paginatedItems = items.slice(offset, offset + per_page);
+	return {
+		page: page,
+		per_page: per_page,
+		total: items.length,
+		total_pages: Math.ceil(items.length / per_page),
+		titles: paginatedItems
+	};
+};
+
 if (typeof _ipaddress === "undefined") {
     console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1');
     _ipaddress = "127.0.0.1";
 };
+
+app.get('/api/titles', function(req, res) {
+    var perPage= req.param('perPage');  
+    var pageNo = req.param('pageNo');
+    var fs = require("fs");
+    var content = fs.readFileSync('data/ELSIO-Graph-Example.txt', 'utf8');
+    var obj = JSON.parse(content);
+    var objArr = [];
+    for(var key in obj.worksById) {
+        objArr.push({id: key, titleType: obj.worksById[key].Title.TitleType, titleText: obj.worksById[key].Title.TitleText})
+    }
+    res.json(getPaginatedItems(objArr, parseInt(pageNo), parseInt(perPage)));    
+    
+});
 
 app.get('/api/titles/', function(req, res) {
     // Read Synchrously
