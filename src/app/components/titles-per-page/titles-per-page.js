@@ -26,6 +26,7 @@ class TitlesPerPage extends React.Component {
       <Form>
         <Select 
           defaultValue="5"
+          value={this.props.perPage ? this.props.perPage.toString() : '5'}
           onChange={this.handleChange}
         >
           <Option value="5" label="Show 5 Titles Per Page" />
