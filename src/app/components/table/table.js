@@ -13,11 +13,12 @@ var TitlesPagination= require('../titles-pagination/titles-pagination');
 import Container from 'muicss/lib/react/container';
 
 var TitleCollection = React.createClass({
-        loadTitlesFromServer: function(pageNo, selectValue) {
+        loadTitlesFromServer: function(pageNo, titleCount, sort) {
             var self = this;
-            var perPage = selectValue || 5;
+            var perPage = titleCount || 5;
+            var pageSort = sort || 'asc';
             $.ajax({
-                url: '/api/titles?pageNo='+ pageNo +'&perPage='+ perPage,
+                url: '/api/titles?pageNo='+ pageNo +'&perPage='+ perPage +'&sort='+pageSort,
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
@@ -25,7 +26,8 @@ var TitleCollection = React.createClass({
                         titles: data.titles,
                         page: data.page,
                         totalPages: data.total_pages,
-                        perPage: data.per_page
+                        perPage: data.per_page,
+                        pageSort: data.sort
                     });
 
 
@@ -49,15 +51,19 @@ var TitleCollection = React.createClass({
         },
     
         handleUserSelect: function(selectValue){
-            this.loadTitlesFromServer(1, selectValue);
+            this.loadTitlesFromServer(1, selectValue, this.state.pageSort);
         },
     
         handleUserClick: function(clickValue){
-            this.loadTitlesFromServer(clickValue, this.state.perPage);
+            this.loadTitlesFromServer(clickValue, this.state.perPage, this.state.pageSort);
         },
     
+        handleUserSort: function(sortValue){
+            this.loadTitlesFromServer(this.state.page, this.state.perPage, sortValue);
+        },
+
         componentDidMount: function() {
-            this.loadTitlesFromServer(1, 5);
+            this.loadTitlesFromServer(1, 5, 'asc');
         },
 
         render: function() {
@@ -75,6 +81,8 @@ var TitleCollection = React.createClass({
                     <ListTitles
                             titles={this.state.titles}
                             filterText={this.state.filterText}
+                            pageSort={this.state.pageSort}
+                            onUserSort={this.handleUserSort}
                             />
                 
                     <TitlesPagination 

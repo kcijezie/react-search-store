@@ -24,9 +24,27 @@ app.use(morgan('dev'));
 var _ipaddress = process.env.OPENSHIFT_NODEJS_IP;
 var _port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
-function getPaginatedItems(items, pageNo, perPage) {
+function sortAscending(a,b) {
+  if (a.titleText.toLowerCase() < b.titleText.toLowerCase())
+    return -1;
+  if (a.titleText.toLowerCase() > b.titleText.toLowerCase())
+    return 1;
+  return 0;
+};
+
+function sortDescending(a,b) {
+  if (a.titleText.toLowerCase() > b.titleText.toLowerCase())
+    return -1;
+  if (a.titleText.toLowerCase() < b.titleText.toLowerCase())
+    return 1;
+  return 0;
+};
+
+
+function getPaginatedItems(items, pageNo, perPage, sort) {
 	var page = pageNo || 1,
 	    per_page = perPage || 5,
+	    title_sort = sort,
 	    offset = (page - 1) * per_page,
 	    paginatedItems = items.slice(offset, offset + per_page);
 	return {
@@ -34,7 +52,8 @@ function getPaginatedItems(items, pageNo, perPage) {
 		per_page: per_page,
 		total: items.length,
 		total_pages: Math.ceil(items.length / per_page),
-		titles: paginatedItems
+		titles: paginatedItems,
+        sort: sort
 	};
 };
 
@@ -46,6 +65,7 @@ if (typeof _ipaddress === "undefined") {
 app.get('/api/titles', function(req, res) {
     var perPage= req.param('perPage');  
     var pageNo = req.param('pageNo');
+    var sort = req.param('sort') || 'asc';
     var fs = require("fs");
     var content = fs.readFileSync('data/ELSIO-Graph-Example.txt', 'utf8');
     var obj = JSON.parse(content);
@@ -53,7 +73,7 @@ app.get('/api/titles', function(req, res) {
     for(var key in obj.worksById) {
         objArr.push({id: key, titleType: obj.worksById[key].Title.TitleType, titleText: obj.worksById[key].Title.TitleText})
     }
-    res.json(getPaginatedItems(objArr, parseInt(pageNo), parseInt(perPage)));    
+    res.json(getPaginatedItems(sort === 'asc' ? objArr.sort(sortAscending) : objArr.sort(sortDescending), parseInt(pageNo), parseInt(perPage), sort));    
     
 });
 

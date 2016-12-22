@@ -22,6 +22,11 @@ button {
  * Header CSS
  */
 
+.sortHeader:hover{
+    background-color: rgba(0,0,0,.12);
+    cursor: pointer;
+}
+
 header {
     position: fixed;
     top: 0;
