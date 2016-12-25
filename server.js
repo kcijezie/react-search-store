@@ -22,7 +22,7 @@ app.use(morgan('dev'));
 
 // listen (start app with node server.js) ======================================
 var _ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-var _port      = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+var _port      = process.env.OPENSHIFT_NODEJS_PORT || 80;
 
 function sortAscending(a,b) {
   if (a.titleText.toLowerCase() < b.titleText.toLowerCase())
