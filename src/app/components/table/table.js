@@ -11,6 +11,7 @@ var ListTitles= require('../list-title/list-title');
 var TitlesPerPage= require('../titles-per-page/titles-per-page');
 var TitlesPagination= require('../titles-pagination/titles-pagination');
 import Container from 'muicss/lib/react/container';
+import Panel from 'muicss/lib/react/panel';
 
 var TitleCollection = React.createClass({
         loadTitlesFromServer: function(pageNo, titleCount, sort, searchString) {
@@ -27,8 +28,7 @@ var TitleCollection = React.createClass({
                         page: data.page,
                         totalPages: data.total_pages,
                         perPage: data.per_page,
-                        pageSort: data.sort,
-                        filterText: searchString
+                        pageSort: data.sort
                     });
 
 
@@ -46,6 +46,9 @@ var TitleCollection = React.createClass({
         },
 
         handleUserInput: function(filterText){
+            this.setState({
+                filterText: filterText
+            });
             this.loadTitlesFromServer(1, 25, this.state.pageSort, filterText);
         },
     
@@ -68,6 +71,7 @@ var TitleCollection = React.createClass({
         render: function() {
             return (
                 <div className="mui-container-fluid">
+                <Panel>
                     <SearchBar
                         filterText={this.state.filterText}
                         onUserInput={this.handleUserInput}
@@ -90,6 +94,7 @@ var TitleCollection = React.createClass({
                         totalPages={this.state.totalPages}
                         onUserClick={this.handleUserClick}
                         />
+                </Panel>
                     <br />
                 </div>
             );
