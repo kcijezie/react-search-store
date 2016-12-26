@@ -28,7 +28,7 @@ var TitleCollection = React.createClass({
                         totalPages: data.total_pages,
                         perPage: data.per_page,
                         pageSort: data.sort,
-                        filterText: data.searchString
+                        filterText: searchString
                     });
 
 

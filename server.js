@@ -85,7 +85,7 @@ app.get('/api/titles', function(req, res) {
     var obj = JSON.parse(content);
     var objArr = [];
     for(var key in obj.worksById) {
-        objArr.push({id: key, titleType: obj.worksById[key].Title.TitleType, titleText: obj.worksById[key].Title.TitleText})
+        objArr.push({id: key, titleType: obj.worksById[key].Title.TitleType, titleText: obj.worksById[key].Title.TitleText, author: obj.worksById[key].Contributor})
     }
     res.json(getPaginatedItems(sort === 'asc' ? filterArray(objArr.sort(sortAscending),searchString) : filterArray(objArr.sort(sortDescending), searchString), parseInt(pageNo), parseInt(perPage), sort, searchString));    
     
@@ -104,13 +104,9 @@ app.get('/api/titles/', function(req, res) {
 });
 
 app.get('*', express.static(__dirname + '/dist/index.html'));
+
 // listen (start app with node server.js) ===================
 app.listen(_port);
 console.log('app listening on port ' + _port);
 
-//app.listen(_port, _ipaddress, function() {
-//    console.log('%s: Node server started on %s:%d ...',
-//        Date(Date.now() ), _ipaddress, _port);
-//
-//});
 

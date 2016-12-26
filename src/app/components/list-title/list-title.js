@@ -33,7 +33,7 @@ class ListTitles extends React.Component {
                 return;
             }
 
-            return <tr key={title.id}><td><b>{title.id}</b></td><td>{title.titleText}</td></tr>;
+            return <tr key={title.id}><td><b>{title.id}</b></td><td>{title.titleText}</td><td>{title.author.NamesBeforeKey + ' ' + title.author.KeyNames }</td></tr>;
         });
 
         return (
@@ -51,6 +51,7 @@ class ListTitles extends React.Component {
                                 aria-hidden="true" 
                                 style={{display: self.props.pageSort === 'desc' ? 'inline' : 'none' }}></i> 
                                 &nbsp; Title</th>
+                        <th>Contributor</th>
                     </tr>
                 </thead>
              <tbody>
