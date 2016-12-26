@@ -105,12 +105,12 @@ app.get('/api/titles/', function(req, res) {
 
 app.get('*', express.static(__dirname + '/dist/index.html'));
 // listen (start app with node server.js) ===================
-//app.listen(_port);
-//console.log('app listening on port ' + _port);
+app.listen(_port);
+console.log('app listening on port ' + _port);
 
-app.listen(_port, _ipaddress, function() {
-    console.log('%s: Node server started on %s:%d ...',
-        Date(Date.now() ), _ipaddress, _port);
-
-});
+//app.listen(_port, _ipaddress, function() {
+//    console.log('%s: Node server started on %s:%d ...',
+//        Date(Date.now() ), _ipaddress, _port);
+//
+//});
 
