@@ -28,13 +28,17 @@ class ListTitles extends React.Component {
     }
     render() {
         var self = this;
-        var titles  = self.props.titles.map(function(title) {
+        var titles = [];
+        if(self.props.titles !== undefined){
+          titles  = self.props.titles.map(function(title) {
             if (title === null) {
                 return;
             }
 
             return <tr key={title.id}><td><b>{title.id}</b></td><td>{title.titleText}</td></tr>;
         });
+        }
+        
 
         return (
             <table className="mui-table mui-table--bordered">
