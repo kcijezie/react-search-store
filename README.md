@@ -18,7 +18,7 @@ This repository contains 1 release:
 1. Clone repository `git clone https://github.com/kcijezie/react-search-store.git`
 2. Enter project directory `cd react-search-store`
 3. Install dependencies `npm i` or `npm install`
-4. Run `node server` - start production server, try it by opening `http://localhost:8080/`
+4. Run `node server` - start production server, try it by opening `http://localhost:3000/`
 
 
 # Tests - Find it in /src/readme
